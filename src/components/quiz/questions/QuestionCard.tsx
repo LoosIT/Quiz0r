@@ -153,6 +153,8 @@ export function QuestionCard({
                       <span>
                         {question.questionType === "MULTI_SELECT"
                           ? "Multi Select"
+                          : question.questionType === "TRUE_FALSE"
+                          ? "True/False"
                           : "Single Select"}
                       </span>
                       <span>·</span>

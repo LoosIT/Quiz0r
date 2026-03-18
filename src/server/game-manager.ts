@@ -319,7 +319,7 @@ export class GameManager {
         questionText: q.questionText,
         imageUrl: q.imageUrl,
         hostNotes: q.hostNotes,
-        questionType: q.questionType as "SINGLE_SELECT" | "MULTI_SELECT",
+        questionType: q.questionType as "SINGLE_SELECT" | "MULTI_SELECT" | "TRUE_FALSE",
         timeLimit: q.timeLimit,
         points: q.points,
         answers: q.answers.map((a) => ({
@@ -550,7 +550,7 @@ export class GameManager {
     let points = 0;
     let isCorrect = false;
 
-    if (question.questionType === "SINGLE_SELECT") {
+    if (question.questionType === "SINGLE_SELECT" || question.questionType === "TRUE_FALSE") {
       isCorrect = answerIds.length === 1 && correctIds.includes(answerIds[0]);
       points = calculateSingleSelectScore(
         question.points,
@@ -1304,7 +1304,7 @@ export class GameManager {
           imageUrl: q.imageUrl,
           hostNotes: q.hostNotes,
           hint: q.hint,
-          questionType: q.questionType as "SINGLE_SELECT" | "MULTI_SELECT" | "SECTION",
+          questionType: q.questionType as "SINGLE_SELECT" | "MULTI_SELECT" | "TRUE_FALSE" | "SECTION",
           timeLimit: q.timeLimit,
           points: q.points,
           answers,

@@ -4,6 +4,7 @@ import { QuizTheme } from "./theme";
 export const QuestionType = {
   SINGLE_SELECT: "SINGLE_SELECT",
   MULTI_SELECT: "MULTI_SELECT",
+  TRUE_FALSE: "TRUE_FALSE",
   SECTION: "SECTION",
 } as const;
 

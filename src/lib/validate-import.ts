@@ -156,7 +156,7 @@ function validateQuestion(q: unknown, index: number): ValidationResult {
   }
 
   // Question type
-  const validTypes = ["SINGLE_SELECT", "MULTI_SELECT", "SECTION"];
+  const validTypes = ["SINGLE_SELECT", "MULTI_SELECT", "TRUE_FALSE", "SECTION"];
   if (!validTypes.includes(question.questionType)) {
     return { valid: false, error: `Question ${index + 1}: invalid question type (must be SINGLE_SELECT, MULTI_SELECT, or SECTION)` };
   }

@@ -191,6 +191,9 @@ export function QuestionEditorDialog({
   const [advancedOpen, setAdvancedOpen] = useState(easterEggEnabled);
 
   const addAnswer = () => {
+    if (questionType === "TRUE_FALSE") {
+
+    }
     if (answers.length < 6) {
       setAnswers([...answers, { answerText: "", isCorrect: false }]);
     }
@@ -214,7 +217,7 @@ export function QuestionEditorDialog({
     if (
       field === "isCorrect" &&
       value === true &&
-      questionType === "SINGLE_SELECT"
+      (questionType === "SINGLE_SELECT" || questionType === "TRUE_FALSE")
     ) {
       newAnswers.forEach((a, i) => {
         if (i !== index) a.isCorrect = false;
@@ -222,6 +225,22 @@ export function QuestionEditorDialog({
     }
 
     setAnswers(newAnswers);
+  };
+
+  const onQuestionTypeChange = (type: string) => {
+    if (type === "TRUE_FALSE") {
+      setAnswers([
+        { answerText: "True", isCorrect: false },
+        { answerText: "False", isCorrect: false },
+      ]);
+    } else if (questionType === "TRUE_FALSE" && type !== "TRUE_FALSE") {
+      // Reset answers when switching away from TRUE_FALSE
+      setAnswers([
+        { answerText: "", isCorrect: false },
+        { answerText: "", isCorrect: false }
+      ]);
+    }
+    setQuestionType(type);
   };
 
   // Validation
@@ -410,7 +429,8 @@ export function QuestionEditorDialog({
 
             {/* Section 2: Type + Time/Points */}
             <div className="grid grid-cols-3 gap-4">
-              <div className="space-y-2">
+              {/* Type */}
+              <div className="overflow-x-auto space-y-2">
                 <Label>Type</Label>
                 <div className="flex gap-2">
                   <Button
@@ -420,9 +440,20 @@ export function QuestionEditorDialog({
                     }
                     size="sm"
                     className="flex-1"
-                    onClick={() => setQuestionType("SINGLE_SELECT")}
+                    onClick={() => onQuestionTypeChange("SINGLE_SELECT")}
                   >
                     Single
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={
+                      questionType === "TRUE_FALSE" ? "default" : "outline"
+                    }
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => onQuestionTypeChange("TRUE_FALSE")}
+                  >
+                    True/False
                   </Button>
                   <Button
                     type="button"
@@ -431,13 +462,13 @@ export function QuestionEditorDialog({
                     }
                     size="sm"
                     className="flex-1"
-                    onClick={() => setQuestionType("MULTI_SELECT")}
+                    onClick={() => onQuestionTypeChange("MULTI_SELECT")}
                   >
                     Multi
                   </Button>
                 </div>
               </div>
-
+              {/* Time */}
               <div className="space-y-2">
                 <Label htmlFor="timeLimit">Time (sec)</Label>
                 <Input
@@ -449,7 +480,7 @@ export function QuestionEditorDialog({
                   onChange={(e) => setTimeLimit(Number(e.target.value))}
                 />
               </div>
-
+              {/* Points */}
               <div className="space-y-2">
                 <Label htmlFor="points">Points</Label>
                 <Input

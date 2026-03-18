@@ -49,7 +49,7 @@ interface NormalizedAnswer {
 
 interface NormalizedQuestion {
   questionText: string;
-  questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "SECTION";
+  questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "TRUE_FALSE" | "SECTION";
   hint: string | null;
   hostNotes: string | null;
   imageUrl: string | null;
@@ -75,6 +75,7 @@ async function getOpenAIClient(): Promise<OpenAI | null> {
 function normalizeQuestionType(type?: string): NormalizedQuestion["questionType"] {
   const normalized = type?.toUpperCase();
   if (normalized === "MULTI_SELECT") return "MULTI_SELECT";
+  if (normalized === "TRUE_FALSE") return "TRUE_FALSE";
   if (normalized === "SECTION") return "SECTION";
   return "SINGLE_SELECT";
 }
@@ -117,7 +118,7 @@ function normalizeAnswers(
   }
 
   // Single select should only have one correct answer
-  if (questionType === "SINGLE_SELECT") {
+  if (questionType === "SINGLE_SELECT" || questionType === "TRUE_FALSE") {
     let madeFirstCorrect = false;
     for (const answer of answers) {
       if (answer.isCorrect && !madeFirstCorrect) {

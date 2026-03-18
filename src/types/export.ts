@@ -39,7 +39,7 @@ export interface ExportedQuestion {
   questionText: string;
   imageRef: string | null; // Path in ZIP: e.g., "images/q_0.jpg"
   hostNotes: string | null;
-  questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "SECTION";
+  questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "TRUE_FALSE" | "SECTION";
   timeLimit: number;
   points: number;
   orderIndex: number;

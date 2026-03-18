@@ -113,8 +113,10 @@ export function SortableQuestionCard({
                 ) : (
                   <>
                     <span>
-                      {question.questionType === "MULTI_SELECT"
+                        {question.questionType === "MULTI_SELECT"
                         ? "Multi"
+                        : question.questionType === "TRUE_FALSE"
+                        ? "True/False"
                         : "Single"}
                     </span>
                     <span>•</span>

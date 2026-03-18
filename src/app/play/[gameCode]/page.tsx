@@ -557,7 +557,7 @@ export default function PlayerGamePage({
 
     const newSelected = new Set(selectedAnswers);
 
-    if (effectiveCurrentQuestion?.questionType === "SINGLE_SELECT") {
+    if (effectiveCurrentQuestion?.questionType === "SINGLE_SELECT" || effectiveCurrentQuestion?.questionType === "TRUE_FALSE") {
       // Single select - replace selection
       newSelected.clear();
       newSelected.add(answerId);

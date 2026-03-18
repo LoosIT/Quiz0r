@@ -522,6 +522,8 @@ export default function HostControlPage({
                       <p className="text-sm text-muted-foreground mt-2">
                         {currentQuestion?.questionType === "MULTI_SELECT"
                           ? "Multi-select"
+                          : currentQuestion?.questionType === "TRUE_FALSE"
+                          ? "True/False"
                           : "Single select"}{" "}
                         • {currentQuestion?.points} points •{" "}
                         {currentQuestion?.timeLimit}s

@@ -40,7 +40,7 @@ model Quiz {
 }
 
 // Individual question within a quiz
-// questionType: "SINGLE_SELECT" | "MULTI_SELECT"
+// questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "TRUE_FALSE"
 model Question {
   id           String   @id @default(cuid())
   quizId       String

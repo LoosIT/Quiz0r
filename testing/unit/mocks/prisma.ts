@@ -12,7 +12,7 @@ type MockQuizAnswer = {
 type MockQuizQuestion = {
   id: string;
   questionText: string;
-  questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "SECTION";
+  questionType: "SINGLE_SELECT" | "MULTI_SELECT" | "TRUE_FALSE" | "SECTION";
   timeLimit: number;
   points: number;
   orderIndex: number;
