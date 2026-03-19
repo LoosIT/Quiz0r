@@ -191,8 +191,9 @@ export function QuestionEditorDialog({
   const [advancedOpen, setAdvancedOpen] = useState(easterEggEnabled);
 
   const addAnswer = () => {
-    if (questionType === "TRUE_FALSE") {
-
+    // True/False question can only have 2 answers
+    if (questionType === "TRUE_FALSE" && answers.length == 2) {
+      return;
     }
     if (answers.length < 6) {
       setAnswers([...answers, { answerText: "", isCorrect: false }]);
